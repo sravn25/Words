@@ -3,9 +3,10 @@ import re
 
 
 def clear():
+
     if os.name == 'nt':
         os.system("cls")
-    else:
+    elif os.name == 'posix':
         os.system("clear")
 
 
@@ -44,6 +45,14 @@ def search(s):
         print("time")
 
 
+def freq(s):
+    x = {char: s.count(char) for char in s}
+    x = dict(sorted(x.items(), key=lambda item: item[1], reverse=True))
+    for letter in x:
+        if letter != " ": 
+            print(letter, ":", x[letter])
+
+
 def menu(s):
     while True:
         clear()
@@ -51,8 +60,9 @@ def menu(s):
         print(s, end="\n\n")
         print("1. Word and Character count")
         print("2. Occurence of word")
-        print("3. Change sentence or paragraph")
-        print("4. Quit")
+        print("3. Frequency of Words")
+        print("4. Change sentence or paragraph")
+        print("5. Quit")
 
         opt = input("\nWhat would you like to do?\n")
 
@@ -63,10 +73,14 @@ def menu(s):
             search(s)
 
         elif opt == "3":
-            s = entry()
+            freq(s)
 
         elif opt == "4":
+            s = entry()
+
+        elif opt == "5":
             input("Goodbye")
+            clear()
             raise SystemExit(0)
 
         else:
