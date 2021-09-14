@@ -17,22 +17,20 @@ def entry():
 
 def count(s):
     clear()
-    print(s)
+    print(s, end="\n\n")
     # character count
     chars = len(s)
-    print(chars, end=" ")
-    if chars > 1:
-        print("characters")
-    else:
-        print("character")
+    print("Character:", chars)
 
     # word count
     word = len(s.split())
-    print(word, end=" ")
-    if word > 1:
-        print("words")
-    else:
-        print("word")
+    print("Word:", word)
+    
+    # common occurence
+    x = mostChar(s)
+    print(f"Most occured character: \"{x[0]}\" ({x[1]})")
+    x = mostWord(s)
+    print(f"Most occured word: \"{x[0]}\" ({x[1]})")
 
 
 def search(s):
@@ -45,20 +43,40 @@ def search(s):
         print("time")
 
 
-def charFreq(s):
+def sortCharFreq(s):
     s = s.replace(" ", "")
     x = {char: s.count(char) for char in s}
     x = dict(sorted(x.items(), key=lambda item: item[1], reverse=True))
+    return x
+
+
+def charFreq(s):
+    x = sortCharFreq(s)
     for letter in x:
         print(letter, ":", x[letter])
+
+
+def mostChar(s):
+    x = sortCharFreq(s)
     return [(next(iter(x.keys()))), (next(iter(x.values())))]
 
-def wordFreq(s):
+
+
+def sortWordFreq(s):
     s = s.split()
     w = {word: s.count(word) for word in s}        
     w = dict(sorted(w.items(), key=lambda item: item[1], reverse=True))
+    return w
+
+
+def wordFreq(s):
+    w = sortWordFreq(s)
     for word in w:
         print(word, ":", w[word])
+
+
+def mostWord(s):
+    w = sortWordFreq(s)
     return [(next(iter(w.keys()))), (next(iter(w.values())))]
 
 
