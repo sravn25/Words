@@ -35,7 +35,7 @@ def count(s):
 
 def search(s):
     word = input("Which word to find: ")
-    occur = len(re.findall(word, s))
+    occur = len(re.findall(word, s, re.IGNORECASE))
     print(f"The word \"{word}\" occured {occur}", end=" ")
     if occur > 1:
         print("times")
@@ -63,7 +63,7 @@ def mostChar(s):
 
 
 def sortWordFreq(s):
-    s = s.split()
+    s = s.lower().split()
     w = {word: s.count(word) for word in s}        
     w = dict(sorted(w.items(), key=lambda item: item[1], reverse=True))
     return w
@@ -118,7 +118,7 @@ def menu(s):
             print("Invalid option!")
             continue
 
-        input("press ENTER to continue")
+        input("\npress ENTER to continue")
 
 
 if __name__ == "__main__":
